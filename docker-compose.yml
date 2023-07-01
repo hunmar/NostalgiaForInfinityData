@@ -2,7 +2,7 @@
 version: '3'
 services:
   download-data:
-    image: freqtradeorg/freqtrade:stable
+    image: freqtradeorg/freqtrade:develop
     container_name: download-data
     volumes:
       - ".:/freqtrade/user_data/data"
