@@ -3,6 +3,7 @@
   "max_open_trades": 6,
   "stake_currency": "USDT",
   "stake_amount": "unlimited",
+  "timeframe": "5m",
   "tradable_balance_ratio": 0.99,
   "fiat_display_currency": "USD",
   "force_entry_enable": true,
