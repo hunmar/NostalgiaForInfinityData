@@ -1,8 +1,14 @@
 name: Update Data
 
-on: [push,workflow_dispatch]
+on: 
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 concurrency: 1
+
+permissions: write-all
 
 jobs:
 
@@ -11,7 +17,14 @@ jobs:
     timeout-minutes: 180
     strategy:
       fail-fast: false
-
+      matrix:
+        pairs:
+          - 1-50
+          - 51-100
+          - 101-150
+          - 151-200
+          - 201-250
+          - 251-300          
     steps:
       - uses: actions/checkout@v2
         with:
@@ -20,15 +33,21 @@ jobs:
 
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.11
 
       - name: Prep Git
+      
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git reset --hard HEAD
+          git config --local user.name "github-actions[bot]"          
+          git reset --hard HEAD          
+          git checkout -b ${{ matrix.pairs }}
           git status
-
+      - name: Push branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ matrix.pairs }}
       - name: Binance Backtesting Variables
         id: binance-dates
         uses: falti/dotenv-action@v0.2.6
@@ -37,12 +56,13 @@ jobs:
           path:
             backtesting-binance.env
 
-      - name: Download Binance Data (${{ steps.binance-dates.outputs.start_date }} - ${{ steps.binance-dates.outputs.end_date }})
+      - name: Download Binance Data ${{ matrix.pairs }} (${{ steps.binance-dates.outputs.start_date }} - ${{ steps.binance-dates.outputs.end_date }})
         id: binance-data-download
         env:
           START_DATE: ${{ steps.binance-dates.outputs.start_date }}
           END_DATE: ${{ steps.binance-dates.outputs.end_date }}
           EXCHANGE: binance
+          PAIRS: ${{ matrix.pairs }}
         run: |
           docker-compose run --rm download-data
 
@@ -54,42 +74,42 @@ jobs:
         id: commit-binance-changes
         if: steps.binance-data-download.outcome == 'success'
         continue-on-error: true
-        run: |
+        run: |          
           git add binance/*.json.gz
           git commit -a -m "Update Binance exchange data from ${{ steps.binance-dates.outputs.start_date }} to ${{ steps.binance-dates.outputs.end_date }}"
 
-      - name: Kucoin Backtesting Variables
-        id: kucoin-dates
-        uses: falti/dotenv-action@v0.2.6
-        with:
-          log-variables: true
-          path:
-            backtesting-kucoin.env
+      # - name: Kucoin Backtesting Variables
+      #   id: kucoin-dates
+      #   uses: falti/dotenv-action@v0.2.6
+      #   with:
+      #     log-variables: true
+      #     path:
+      #       backtesting-kucoin.env
 
-      - name: Download Kucoin Data (${{ steps.kucoin-dates.outputs.start_date }} - ${{ steps.kucoin-dates.outputs.end_date }})
-        id: kucoin-data-download
-        env:
-          START_DATE: ${{ steps.kucoin-dates.outputs.start_date }}
-          END_DATE: ${{ steps.kucoin-dates.outputs.end_date }}
-          EXCHANGE: kucoin
-        run: |
-          docker-compose run --rm download-data
+      # - name: Download Kucoin Data (${{ steps.kucoin-dates.outputs.start_date }} - ${{ steps.kucoin-dates.outputs.end_date }})
+      #   id: kucoin-data-download
+      #   env:
+      #     START_DATE: ${{ steps.kucoin-dates.outputs.start_date }}
+      #     END_DATE: ${{ steps.kucoin-dates.outputs.end_date }}
+      #     EXCHANGE: kucoin
+      #   run: |
+      #     docker-compose run --rm download-data
 
       - name: Fix File Ownership
         run: |
           sudo chown -R $(id -u):$(id -g) .
 
-      - name: Commit Kucoin Changed Files
-        id: commit-kucoin-changes
-        if: steps.kucoin-data-download.outcome == 'success'
-        continue-on-error: true
-        run: |
-          git add kucoin/*.json.gz
-          git commit -a -m "Update Kucoin exchange data from ${{ steps.kucoin-dates.outputs.start_date }} to ${{ steps.kucoin-dates.outputs.end_date }}"
+      # - name: Commit Kucoin Changed Files
+      #   id: commit-kucoin-changes
+      #   if: steps.kucoin-data-download.outcome == 'success'
+      #   continue-on-error: true
+      #   run: |
+      #     git add kucoin/*.json.gz
+      #     git commit -a -m "Update Kucoin exchange data from ${{ steps.kucoin-dates.outputs.start_date }} to ${{ steps.kucoin-dates.outputs.end_date }}"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
         if: steps.commit-binance-changes.outcome == 'success' || steps.commit-kucoin-changes.outcome == 'success'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: ${{ matrix.pairs }}      

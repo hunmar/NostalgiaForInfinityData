@@ -1,0 +1,70 @@
+{
+    "exchange": {
+        "name": "binance",
+        "pair_whitelist": [
+            "RLC/USDT",
+            "GLMR/USDT",
+            "TFUEL/USDT",
+            "QI/USDT",
+            "BOND/USDT",
+            "GNS/USDT",
+            "NEXO/USDT",
+            "VIDT/USDT",
+            "BURGER/USDT",
+            "BLZ/USDT",
+            "ILV/USDT",
+            "BETA/USDT",
+            "CLV/USDT",
+            "BETH/USDT",
+            "HIVE/USDT",
+            "CVX/USDT",
+            "DGB/USDT",
+            "DODO/USDT",
+            "SANTOS/USDT",
+            "ZRX/USDT",
+            "MBL/USDT",
+            "POWR/USDT",
+            "JST/USDT",
+            "BSW/USDT",
+            "SUPER/USDT",
+            "EPX/USDT",
+            "LAZIO/USDT",
+            "DEGO/USDT",
+            "HIFI/USDT",
+            "GLM/USDT",
+            "TVK/USDT",
+            "WRX/USDT",
+            "PHA/USDT",
+            "OXT/USDT",
+            "DF/USDT",
+            "BAL/USDT",
+            "ORN/USDT",
+            "OSMO/USDT",
+            "VTHO/USDT",
+            "FIRO/USDT",
+            "PORTO/USDT",
+            "WBTC/USDT",
+            "LSK/USDT",
+            "ELF/USDT",
+            "MC/USDT",
+            "MDX/USDT",
+            "UFT/USDT",
+            "VIB/USDT",
+            "MOB/USDT",
+            "TKO/USDT"            
+        ],
+	"ccxt_config": {
+	     "aiohttp_proxy": "http://152.70.65.2:3128",
+            "proxies": {
+                "http": "http://152.70.65.2:3128",
+                "https": "http://152.70.65.2:3128"
+        },
+       "enableRateLimit": true,
+       "timeout": 60000
+	},
+      "ccxt_async_config": {
+          "enableRateLimit": true,
+          "rateLimit": 100,"timeout": 60000
+      }
+    }
+}

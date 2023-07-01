@@ -1,0 +1,70 @@
+{
+    "exchange": {
+        "name": "binance",
+        "pair_whitelist": [
+            "RARE/USDT",
+            "POLYX/USDT",
+            "C98/USDT",
+            "SFP/USDT",
+            "CHR/USDT",
+            "ASTR/USDT",
+            "COTI/USDT",
+            "REEF/USDT",
+            "BAT/USDT",
+            "RIF/USDT",
+            "SYN/USDT",
+            "PUNDIX/USDT",
+            "QUICK/USDT",
+            "PYR/USDT",
+            "TWT/USDT",
+            "AMP/USDT",
+            "IOTX/USDT",
+            "DENT/USDT",
+            "HOT/USDT",
+            "DUSK/USDT",
+            "KNC/USDT",
+            "FIDA/USDT",
+            "RAY/USDT",
+            "IOST/USDT",
+            "DEXE/USDT",
+            "WAXP/USDT",
+            "CHESS/USDT",
+            "IDEX/USDT",
+            "STRAX/USDT",
+            "IRIS/USDT",
+            "KMD/USDT",
+            "FLUX/USDT",
+            "IOTA/USDT",
+            "SC/USDT",
+            "SKL/USDT",
+            "POND/USDT",
+            "UMA/USDT",
+            "BAKE/USDT",
+            "STMX/USDT",
+            "KDA/USDT",
+            "SPELL/USDT",
+            "GTC/USDT",
+            "LEVER/USDT",
+            "API3/USDT",
+            "NULS/USDT",
+            "BAND/USDT",
+            "DATA/USDT",
+            "OGN/USDT",
+            "TRB/USDT",
+            "XEM/USDT"
+        ],
+	"ccxt_config": {
+	     "aiohttp_proxy": "http://152.70.65.2:3128",
+            "proxies": {
+                "http": "http://152.70.65.2:3128",
+                "https": "http://152.70.65.2:3128"
+        },
+       "enableRateLimit": true,
+       "timeout": 60000
+	},
+      "ccxt_async_config": {
+          "enableRateLimit": true,
+          "rateLimit": 100,"timeout": 60000
+      }
+    }
+}
