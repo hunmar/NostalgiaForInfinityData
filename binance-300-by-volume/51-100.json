@@ -3,7 +3,7 @@
         "name": "binance",
         "pair_whitelist": [
             "FET/USDT",
-            // "ALICE/USDT",
+            "ALICE/USDT",
             // "MANA/USDT",
             // "DYDX/USDT",
             // "SSV/USDT",
