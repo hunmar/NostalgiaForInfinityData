@@ -1,0 +1,19 @@
+{
+    "exchange": {
+        "name": "binance",
+        "pair_whitelist": ["BCH/USDT"],
+	"ccxt_config": {
+	     "aiohttp_proxy": "http://152.70.65.2:3128",
+            "proxies": {
+                "http": "http://152.70.65.2:3128",
+                "https": "http://152.70.65.2:3128"
+        },
+       "enableRateLimit": true,
+       "timeout": 60000
+	},
+      "ccxt_async_config": {
+          "enableRateLimit": true,
+          "rateLimit": 200,"timeout": 60000
+      }
+    }
+}
