@@ -32,11 +32,11 @@ jobs:
           python-version: 3.11
 
       - name: Prep Git
+      # git checkout -b ${{ matrix.pairs }}>
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git reset --hard HEAD
-          git checkout -b ${{ matrix.pairs }}
+          git reset --hard HEAD          
           git status
       - name: Push branch
         uses: ad-m/github-push-action@master
@@ -66,13 +66,13 @@ jobs:
         run: |
           sudo chown -R $(id -u):$(id -g) .
 
-      - name: Commit Binance Changed Files
-        id: commit-binance-changes
-        if: steps.binance-data-download.outcome == 'success'
-        continue-on-error: true
-        run: |          
-          git add binance/*.json.gz
-          git commit -a -m "Update Binance exchange data from ${{ steps.binance-dates.outputs.start_date }} to ${{ steps.binance-dates.outputs.end_date }}"
+      # - name: Commit Binance Changed Files
+      #   id: commit-binance-changes
+      #   if: steps.binance-data-download.outcome == 'success'
+      #   continue-on-error: true
+      #   run: |          
+      #     git add binance/*.json.gz
+      #     git commit -a -m "Update Binance exchange data from ${{ steps.binance-dates.outputs.start_date }} to ${{ steps.binance-dates.outputs.end_date }}"
 
       # - name: Kucoin Backtesting Variables
       #   id: kucoin-dates
@@ -103,12 +103,12 @@ jobs:
       #     git add kucoin/*.json.gz
       #     git commit -a -m "Update Kucoin exchange data from ${{ steps.kucoin-dates.outputs.start_date }} to ${{ steps.kucoin-dates.outputs.end_date }}"
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        if: steps.commit-binance-changes.outcome == 'success' || steps.commit-kucoin-changes.outcome == 'success'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ matrix.pairs }}
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   if: steps.commit-binance-changes.outcome == 'success' || steps.commit-kucoin-changes.outcome == 'success'
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ matrix.pairs }}
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
