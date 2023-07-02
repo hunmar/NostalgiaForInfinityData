@@ -39,11 +39,11 @@ jobs:
           git reset --hard HEAD          
           git checkout -b ${{ matrix.pairs }}
           git status
-      - name: Push branch
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+      # - name: Push branch
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ matrix.pairs }}
       - name: Binance Backtesting Variables
         id: binance-dates
         uses: falti/dotenv-action@v0.2.6
@@ -103,12 +103,12 @@ jobs:
       #     git add kucoin/*.json.gz
       #     git commit -a -m "Update Kucoin exchange data from ${{ steps.kucoin-dates.outputs.start_date }} to ${{ steps.kucoin-dates.outputs.end_date }}"
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        # if: steps.commit-binance-changes.outcome == 'success' || steps.commit-kucoin-changes.outcome == 'success'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ matrix.pairs }}
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   # if: steps.commit-binance-changes.outcome == 'success' || steps.commit-kucoin-changes.outcome == 'success'
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ matrix.pairs }}
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
