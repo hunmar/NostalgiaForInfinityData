@@ -64,8 +64,8 @@ jobs:
         id: commit-binance-changes
         if: steps.binance-data-download.outcome == 'success'
         continue-on-error: true
-        run: |
-          git checkout -b ${{ matrix.pairs }}
+        # git checkout -b ${{ matrix.pairs }}
+        run: |          
           git add binance/*.json.gz
           git commit -a -m "Update Binance exchange data from ${{ steps.binance-dates.outputs.start_date }} to ${{ steps.binance-dates.outputs.end_date }}"
 
