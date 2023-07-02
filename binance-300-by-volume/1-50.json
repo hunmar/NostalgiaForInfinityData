@@ -51,7 +51,7 @@
             "ATOM/USDT",
             "NEO/USDT",
             "UNI/USDT",
-            "MDT/USDT"            
+            "MDT/USDT"
         ],
         "ccxt_config": {
             "aiohttp_proxy": "http://152.70.65.2:3128",
@@ -64,7 +64,7 @@
         },
         "ccxt_async_config": {
             "enableRateLimit": true,
-            "rateLimit": 100,
+            "rateLimit": 50,
             "timeout": 60000
         }
     }

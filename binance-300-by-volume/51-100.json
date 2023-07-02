@@ -51,20 +51,21 @@
             "ROSE/USDT",
             "ICX/USDT",
             "HIGH/USDT",
-            "ICP/USDT"            
+            "ICP/USDT"
         ],
-	"ccxt_config": {
-	     "aiohttp_proxy": "http://152.70.65.2:3128",
+        "ccxt_config": {
+            "aiohttp_proxy": "http://152.70.65.2:3128",
             "proxies": {
                 "http": "http://152.70.65.2:3128",
                 "https": "http://152.70.65.2:3128"
+            },
+            "enableRateLimit": true,
+            "timeout": 60000
         },
-       "enableRateLimit": true,
-       "timeout": 60000
-	},
-      "ccxt_async_config": {
-          "enableRateLimit": true,
-          "rateLimit": 100,"timeout": 60000
-      }
+        "ccxt_async_config": {
+            "enableRateLimit": true,
+            "rateLimit": 50,
+            "timeout": 60000
+        }
     }
 }
