@@ -1,4 +1,5 @@
 ---
+# --timeframe 5m 15m 1h 4h 1d
 version: '3'
 services:
   download-data:
@@ -9,7 +10,7 @@ services:
     command: >
       download-data
       --timerange ${START_DATE:-20201201}-${END_DATE:-20211001}
-      --timeframe 5m 15m 1h 4h 1d
+      --timeframe 1d
       --datadir user_data/data/${EXCHANGE:-binance}
       --config user_data/data/pairlists.json
       --config user_data/data/${EXCHANGE:-binance}-300-by-volume/${PAIRS:-1-50}.json
