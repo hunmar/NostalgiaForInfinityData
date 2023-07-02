@@ -108,7 +108,7 @@ jobs:
         if: steps.commit-binance-changes.outcome == 'success' || steps.commit-kucoin-changes.outcome == 'success'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          branch: ${{ matrix.pairs }}
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
