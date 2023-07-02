@@ -38,13 +38,14 @@ jobs:
           git config --local user.name "github-actions[bot]"          
           git reset --hard HEAD          
           git checkout -b ${{ matrix.pairs }}
+          git push --set-upstream origin ${{ matrix.pairs }}
           git status
-      - name: Push branch
-        uses: ad-m/github-push-action@master
-        if: steps.commit-binance-changes.outcome == 'success' || steps.commit-kucoin-changes.outcome == 'success'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+      # - name: Push branch
+      #   uses: ad-m/github-push-action@master
+      #   if: steps.commit-binance-changes.outcome == 'success' || steps.commit-kucoin-changes.outcome == 'success'
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
       - name: Binance Backtesting Variables
         id: binance-dates
         uses: falti/dotenv-action@v0.2.6
