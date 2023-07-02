@@ -115,7 +115,6 @@ jobs:
         with:
           branch: ${{matrix.pairs}}
           base: main
-          delete-branch: true
       - name: Check outputs
         if: ${{ steps.cpr.outputs.pull-request-number }}
         run: |
