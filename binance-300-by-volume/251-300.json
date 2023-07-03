@@ -59,7 +59,7 @@
         },
         "ccxt_async_config": {
             "enableRateLimit": true,
-            "rateLimit": 500,
+            "rateLimit": 300,
             "timeout": 60000
         }
     }
